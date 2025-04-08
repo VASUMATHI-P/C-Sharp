@@ -1,0 +1,2 @@
+No of lines = 5
+No of words = 26

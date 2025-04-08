@@ -1,0 +1,5 @@
+This is a sample text file.
+It has multiple lines.
+Each line has some words.
+We are counting lines and words.
+This is the last line.
