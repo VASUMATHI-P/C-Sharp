@@ -17,4 +17,5 @@ namespace ProductMicroServices.Models
         [Range(0, int.MaxValue, ErrorMessage = "Stock cannot be a Negative value")]
         public int Stock { get; set; }
     }
+
 }

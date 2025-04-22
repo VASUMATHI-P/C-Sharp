@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProductMicroServices.Models;
-using ProductMicroServices.Services;
 
 namespace ProductMicroServices.Controllers
 {
@@ -15,8 +14,8 @@ namespace ProductMicroServices.Controllers
             _service = service;
         }
 
-        // GET: api/products
-        [HttpGet]
+        // GET: api/products/GetAll
+        [HttpGet("GetAll")]
         public async Task<IActionResult> GetAllProducts()
         {
             var products = await _service.GetAllProductsAsync();

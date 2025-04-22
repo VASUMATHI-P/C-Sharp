@@ -1,0 +1,16 @@
+# Build folders
+bin/
+obj/
+
+# IDE stuff
+.vs/
+.vscode/
+*.user
+*.suo
+
+# SQLite DB file
+*.db
+
+# OS junk files
+.DS_Store
+Thumbs.db
