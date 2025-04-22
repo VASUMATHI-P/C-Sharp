@@ -23,10 +23,10 @@ namespace ProductMicroServices.Middlewares
             }
             catch (Exception ex)
             {
-                var errorLog = $"[{DateTime.Now}] Error: {ex.Message}\nStack Trace: {ex.StackTrace}\n";
+                var errorLog = $"[{DateTime.Now}] Error: {ex.Message}";
                 File.AppendAllText(logFilePath, errorLog);
                 context.Response.StatusCode = 500;
-                await context.Response.WriteAsync("An unexpected error occurred.");
+                await context.Response.WriteAsync($"An unexpected error occurred. {ex.Message}");
             }
         }
     }

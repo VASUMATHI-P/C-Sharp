@@ -33,8 +33,6 @@ namespace ProductMicroServices.Repositories
         public async Task<Product?> UpdateProductAsync(Product product)
         {
             var existing = await _context.Products.FindAsync(product.Id);
-            if (existing == null) return null;
-
             existing.Name = product.Name;
             existing.Description = product.Description;
             existing.Category = product.Category;
@@ -48,8 +46,6 @@ namespace ProductMicroServices.Repositories
         public async Task<bool> DeleteProductAsync(int id)
         {
             var product = await _context.Products.FindAsync(id);
-            if (product == null) return false;
-
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
             return true;

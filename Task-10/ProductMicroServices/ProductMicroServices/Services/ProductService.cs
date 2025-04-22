@@ -12,14 +12,45 @@ namespace ProductMicroServices.Services
             _repo = repo;
         }
 
-        public Task<IEnumerable<Product>> GetAllProductsAsync() => _repo.GetAllProductsAsync();
+        public Task<IEnumerable<Product>> GetAllProductsAsync()
+        {
+            return _repo.GetAllProductsAsync();
+        }
 
-        public Task<Product?> GetProductByIdAsync(int id) => _repo.GetProductByIdAsync(id);
+        public Task<Product?> GetProductByIdAsync(int id)
+        {
+            return _repo.GetProductByIdAsync(id);
+        }
 
-        public Task<Product> AddProductAsync(Product product) => _repo.AddProductAsync(product);
+        public Task<Product> AddProductAsync(Product product)
+        {
+            if (string.IsNullOrWhiteSpace(product.Name))
+                throw new ArgumentException("Product name cannot be empty");
 
-        public Task<Product?> UpdateProductAsync(Product product) => _repo.UpdateProductAsync(product);
+            if (product.Price <= 0)
+                throw new ArgumentException("Product price must be positive");
 
-        public Task<bool> DeleteProductAsync(int id) => _repo.DeleteProductAsync(id);
+            return _repo.AddProductAsync(product);
+        }
+
+        public async Task<Product?> UpdateProductAsync(Product product)
+        {
+            var existingProduct = await _repo.GetProductByIdAsync(product.Id);
+            if (existingProduct == null)
+            {
+                throw new InvalidOperationException("Product not found :)");
+            }
+            return await _repo.UpdateProductAsync(product);
+        }
+
+        public async Task<bool> DeleteProductAsync(int id)
+        {
+            var existingProduct = await _repo.GetProductByIdAsync(id);
+            if (existingProduct == null)
+            {
+                throw new InvalidOperationException("Product not found :)");
+            }
+            return await _repo.DeleteProductAsync(id);
+        }
     }
 }
