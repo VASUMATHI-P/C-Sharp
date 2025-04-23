@@ -3,9 +3,7 @@ using Moq;
 using Microsoft.AspNetCore.Mvc;
 using ProductMicroServices.Controllers;
 using ProductMicroServices.Models;
-using ProductMicroServices.Services;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using ProductMicroServices.DTOs;
 
 public class ProductControllerTests
 {
@@ -54,10 +52,11 @@ public class ProductControllerTests
     [Fact]
     public async Task AddProduct_AddsProductSuccessfully()
     {
-        var product = new Product { Id = 2, Name = "Book", Category = "Stationery", Price = 100, Stock = 50 };
-        _mockService.Setup(s => s.AddProductAsync(product)).ReturnsAsync(product);
+        var productDto = new ProductCreateDto { Name = "Book", Category = "Stationery", Price = 100, Stock = 50 };
+        var product = new Product {Id = 1, Name = "Book", Category = "Stationery", Price = 100, Stock = 50 };
+        _mockService.Setup(s => s.AddProductAsync(productDto)).ReturnsAsync(product);
 
-        var result = await _controller.CreateProduct(product);
+        var result = await _controller.CreateProduct(productDto);
 
         var createdAtActionResult = Assert.IsType<CreatedAtActionResult>(result);
         Assert.Equal(201, createdAtActionResult.StatusCode);
