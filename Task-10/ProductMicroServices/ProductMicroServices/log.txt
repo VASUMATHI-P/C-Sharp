@@ -51,3 +51,7 @@
 [23-04-2025 6.31.01 PM] Response: 201
 [23-04-2025 6.46.10 PM] Request: POST /api/Product
 [23-04-2025 6.46.14 PM] Response: 201
+[23-04-2025 6.58.31 PM] Request: POST /api/Product
+[23-04-2025 6.58.34 PM] Response: 201
+[23-04-2025 6.58.46 PM] Request: POST /api/Product
+[23-04-2025 6.58.46 PM] Response: 400
