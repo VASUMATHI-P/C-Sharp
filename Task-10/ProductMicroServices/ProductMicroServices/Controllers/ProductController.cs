@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProductMicroServices.Models;
+using ProductMicroServices.DTOs;
 
 namespace ProductMicroServices.Controllers
 {
@@ -34,12 +35,12 @@ namespace ProductMicroServices.Controllers
 
         // POST: api/products
         [HttpPost]
-        public async Task<IActionResult> CreateProduct([FromBody] Product product)
+        public async Task<IActionResult> CreateProduct([FromBody] ProductCreateDto productDto)
         {
-            if (product == null)
+            if (productDto == null)
                 return BadRequest();
 
-            var createdProduct = await _service.AddProductAsync(product);
+            var createdProduct = await _service.AddProductAsync(productDto);
             return CreatedAtAction(nameof(GetProductById), new { id = createdProduct.Id }, createdProduct);
         }
 

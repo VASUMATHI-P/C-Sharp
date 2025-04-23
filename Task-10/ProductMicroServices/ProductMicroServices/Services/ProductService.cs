@@ -1,5 +1,7 @@
 ﻿using ProductMicroServices.Models;
 using ProductMicroServices.Repositories;
+using ProductMicroServices.DTOs;
+using ProductMicroServices.Mappers;
 
 namespace ProductMicroServices.Services
 {
@@ -22,14 +24,15 @@ namespace ProductMicroServices.Services
             return _repo.GetProductByIdAsync(id);
         }
 
-        public Task<Product> AddProductAsync(Product product)
+        public Task<Product> AddProductAsync(ProductCreateDto productDto)
         {
-            if (string.IsNullOrWhiteSpace(product.Name))
+            if (string.IsNullOrWhiteSpace(productDto.Name))
                 throw new ArgumentException("Product name cannot be empty");
 
-            if (product.Price <= 0)
+            if (productDto.Price <= 0)
                 throw new ArgumentException("Product price must be positive");
 
+            var product = ProductMapper.MapToEntity(productDto);
             return _repo.AddProductAsync(product);
         }
 
